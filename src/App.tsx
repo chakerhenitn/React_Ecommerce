@@ -36,7 +36,7 @@ const App = () => {
       [name]: value,
     });
   };
-
+  console.log(product);
   /**----------RENDERS-----------*/
   const renderProductList = productList.map((product) => (
     <ProductCard key={product.id} product={product} />
@@ -49,7 +49,7 @@ const App = () => {
         type="text"
         id={inputItem.id}
         name={inputItem.name}
-        value={""}
+        value={product[inputItem.name]}
         onChange={onChangeHandler}
       />
     </div>
@@ -59,17 +59,20 @@ const App = () => {
       <Button className="bg-indigo-700 hover:bg-indigo-800" onClick={openModal}>
         ADD
       </Button>
-      <div className=" m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 p-2 rounded-md ">
+      <div className=" m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4  rounded-md ">
         {renderProductList}
       </div>
-
       <Modal isOpen={isOpen} closeModal={closeModal} title="ADD NEW PRODUCT">
-        <div className="space-y-3">{renderFormItemList}</div>
-        <div className="flex items-center space-x-3 my-4">
-          <Button className="bg-indigo-700 hover:bg-indigo-800">Submit</Button>
-          <Button className="bg-gray-300 hover:bg-gray-800">Cancel</Button>
-        </div>
-      </Modal>
+        <form className="space-y-3">
+          {renderFormItemList}
+          <div className="flex items-center space-x-3">
+            <Button className="bg-indigo-700 hover:bg-indigo-800">
+              Submit
+            </Button>
+            <Button className="bg-gray-300 hover:bg-gray-800">Cancel</Button>
+          </div>
+        </form>
+      </Modal>{" "}
     </main>
   );
 };
